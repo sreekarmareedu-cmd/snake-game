@@ -1,0 +1,6 @@
+{
+  "name": "Neon Pulse",
+  "description": "An immersive dark neon music player integrated with a high-speed Snake game.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

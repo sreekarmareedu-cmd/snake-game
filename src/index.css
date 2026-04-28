@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "VT323", monospace;
+  --font-mono: "VT323", monospace;
+  --font-pixel: "Press Start 2P", cursive;
+
+  @keyframes glitch {
+    0% { transform: translate(0); clip-path: inset(45% 0 50% 0); }
+    10% { transform: translate(-5px, -2px); clip-path: inset(10% 0 80% 0); }
+    20% { transform: translate(5px, 2px); clip-path: inset(80% 0 5% 0); }
+    30% { transform: translate(-5px, 0); clip-path: inset(50% 0 30% 0); }
+    40% { transform: translate(0); clip-path: inset(0 0 0 0); }
+  }
+
+  @keyframes noise {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+}
+
+.noise-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat;
+  animation: noise .2s infinite;
+  opacity: .05;
+  pointer-events: none;
+  z-index: 99;
+}
+
+.animate-glitch {
+  position: relative;
+}
+
+.animate-glitch::before,
+.animate-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.animate-glitch::before {
+  left: 3px;
+  text-shadow: -2px 0 #ff00ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch 2s infinite linear alternate-reverse;
+}
+
+.animate-glitch::after {
+  left: -3px;
+  text-shadow: -2px 0 #00ffff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch 3s infinite linear alternate-reverse;
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.1), transparent);
+  z-index: 100;
+  pointer-events: none;
+  animation: scanline 4s linear infinite;
+}
+
